@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+/* Global Reset */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Poppins", "Open Sans", sans-serif;
+  font-weight: 400; /* Regular weight */
+}
+body {
+  background-color: #d4f1f4;
+}
+.pong-container {
+  padding: 2rem 4rem;
+  position: relative;
+  width: 100%;
+  height: 900px; /* Adjust as needed */
+  border: 2px solid #000;
+  background: linear-gradient(
+      0deg,
+      rgba(22, 19, 50, 0.95) 0%,
+      rgba(22, 19, 50, 0.95) 100%
+    ),
+    url(/Image/background-pong-image.png) lightgray center center / 150% 150%
+      no-repeat;
+  background-color: #fff;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .paddle {
+    width: 13rem; /* Base size */
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .player {
+    position: absolute;
+    left: 1.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .opponent {
+    position: absolute;
+    right: 1.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .ball {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 14.167rem; /* Base size */
+    height: auto;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Vertical center text */
+  .center-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(270deg);
+    font-size: 4.5rem; /* Base size */
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 0.1rem; /* Adjusted spacing */
+    color: #fff;
+    font-family: "Poppins", "Open Sans", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  /* Bottom-left text */
+  .bottom-left-text {
+    position: absolute;
+    left: 1.25rem;
+    bottom: 1.25rem;
+    font-size: 3rem;
+    color: #ffffff;
+    font-family: "Poppins", "Open Sans", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+}
+
+/* Media Queries for Responsiveness */
+
+/* Extra Small Devices (Portrait Phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .pong-container {
+    height: 400px;
+    .paddle {
+      width: 5rem; /* Adjust size for smaller screens */
+      height: auto;
+    }
+
+    .ball {
+      width: 5rem;
+    }
+
+    .center-text {
+      font-size: 1.5rem;
+    }
+
+    .bottom-left-text {
+      font-size: 1rem;
+    }
+  }
+}
+
+/* Small Devices (Landscape Phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .pong-container {
+    height: 600px;
+
+    .paddle {
+      width: 7rem;
+      height: auto;
+    }
+
+    .ball {
+      width: 12rem;
+    }
+
+    .center-text {
+      font-size: 2rem;
+    }
+
+    .bottom-left-text {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+/* Medium Devices (Tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .pong-container {
+    height: 600px;
+
+    .paddle {
+      width: 10rem;
+      height: auto;
+    }
+
+    .ball {
+      width: 14rem;
+    }
+
+    .center-text {
+      font-size: 2.5rem;
+    }
+
+    .bottom-left-text {
+      font-size: 2rem;
+    }
+  }
+}
+
+/* Large Devices (Desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .pong-container {
+    .paddle {
+      width: 12rem;
+      height: auto;
+    }
+
+    .ball {
+      width: 16rem;
+    }
+
+    .center-text {
+      font-size: 4rem;
+    }
+
+    .bottom-left-text {
+      font-size: 2.5rem;
+    }
+  }
+}
