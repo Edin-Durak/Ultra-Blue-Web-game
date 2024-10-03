@@ -24,12 +24,6 @@
     ballSpeed = 2; // Slower speed for smaller screens
   }
 
-  // Constantly log paddle positions for debugging
-  function logPaddlePositions() {
-    console.log("Player Paddle Y:", playerPosY);
-    console.log("Opponent Paddle Y:", opponentPosY);
-  }
-
   function updateSizes() {
     playerHeight = playerPaddle.getBoundingClientRect().height;
     opponentHeight = opponentPaddle.getBoundingClientRect().height;
@@ -98,8 +92,6 @@
     if (opponentPosY < 0) opponentPosY = 0;
     if (opponentPosY > pongHeight - opponentHeight)
       opponentPosY = pongHeight - opponentHeight;
-
-    logPaddlePositions();
 
     requestAnimationFrame(update);
   }
