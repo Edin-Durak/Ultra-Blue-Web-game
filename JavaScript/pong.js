@@ -19,11 +19,6 @@
   let ballDirY = 1;
   let opponentSpeed = 3;
 
-  // Paddle movement variables
-  let playerPaddleDirection = 0; // 1 for down, -1 for up, 0 for stationary
-  let playerPaddleSpeed = 3; // Speed at which the paddle moves
-  let randomDirection = 1; // 1 for down, -1 for up
-
   // Adjust ball speed based on screen size
   if (window.innerWidth <= 992) {
     ballSpeed = 2; // Slower speed for smaller screens
@@ -89,7 +84,6 @@
     ball.style.left = `${ballPosX}px`;
     ball.style.top = `${ballPosY}px`;
 
-    // Move opponent paddle automatically
     if (opponentPosY >= pongHeight - opponentHeight || opponentPosY <= 0) {
       opponentSpeed *= -1;
     }
@@ -120,56 +114,24 @@
   });
 
   // Handle touch movement (for mobile devices)
-  pongContainer.addEventListener("touchstart", (e) => {
-    // Start moving the paddle automatically on first touch
-    if (playerPaddleDirection === 0) {
-      playerPaddleDirection = Math.random() < 0.5 ? 1 : -1; // Randomly choose a direction
-      randomDirection = playerPaddleDirection; // Set the initial direction
-    }
-  });
-
   pongContainer.addEventListener("touchmove", (e) => {
     const touch = e.touches[0]; // Get the first touch
-    const touchY = touch.clientY - pongContainer.getBoundingClientRect().top; // Get touch position
+    playerPosY =
+      touch.clientY -
+      pongContainer.getBoundingClientRect().top -
+      playerPaddle.getBoundingClientRect().height / 2;
 
-    // Change direction based on the touch position relative to the paddle
-    const paddleTop =
-      playerPaddle.getBoundingClientRect().top -
-      pongContainer.getBoundingClientRect().top;
-
-    // Change direction if the user touches the screen
-    if (touchY < paddleTop) {
-      randomDirection = -1; // Move up
-    } else if (
-      touchY >
-      paddleTop + playerPaddle.getBoundingClientRect().height
-    ) {
-      randomDirection = 1; // Move down
-    }
+    if (playerPosY < 0) playerPosY = 0;
+    if (
+      playerPosY >
+      pongContainer.clientHeight - playerPaddle.getBoundingClientRect().height
+    )
+      playerPosY =
+        pongContainer.clientHeight -
+        playerPaddle.getBoundingClientRect().height;
 
     e.preventDefault(); // Prevent scrolling when touching the screen
   });
-
-  // Update player paddle position automatically
-  function updatePlayerPaddle() {
-    if (playerPaddleDirection !== 0) {
-      playerPosY += randomDirection * playerPaddleSpeed;
-
-      // Constrain paddle position within the container
-      if (playerPosY < 0) playerPosY = 0;
-      if (
-        playerPosY >
-        pongContainer.clientHeight - playerPaddle.getBoundingClientRect().height
-      ) {
-        playerPosY =
-          pongContainer.clientHeight -
-          playerPaddle.getBoundingClientRect().height;
-      }
-    }
-
-    // Update the player's paddle position in the DOM
-    playerPaddle.style.top = `${playerPosY}px`;
-  }
 
   // Start the game loop
   resetBall();
