@@ -84,11 +84,14 @@
     ball.style.left = `${ballPosX}px`;
     ball.style.top = `${ballPosY}px`;
 
-    if (opponentPosY >= pongHeight - opponentHeight || opponentPosY <= 0) {
-      opponentSpeed *= -1;
+    // Opponent paddle logic: follow the ball's Y position
+    if (ballPosY + ballHeight / 2 > opponentPosY + opponentHeight / 2) {
+      opponentPosY += opponentSpeed; // Move paddle down
+    } else if (ballPosY + ballHeight / 2 < opponentPosY + opponentHeight / 2) {
+      opponentPosY -= opponentSpeed; // Move paddle up
     }
-    opponentPosY += opponentSpeed;
 
+    // Ensure opponent paddle stays within container bounds
     if (opponentPosY < 0) opponentPosY = 0;
     if (opponentPosY > pongHeight - opponentHeight)
       opponentPosY = pongHeight - opponentHeight;

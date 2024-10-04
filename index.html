@@ -13,30 +13,38 @@
   </head>
   <body>
     <div class="padding-container"></div>
-    <div class="pong-container">
+    <section class="pong-container" aria-label="Pong Game">
       <!-- Left paddle (user's paddle) -->
       <img
         src="Image/ultrablue-1 .png"
         class="paddle player"
-        alt="Player Paddle"
+        alt="Player's paddle in Pong game"
+        loading="lazy"
       />
 
       <!-- Ball -->
-      <img src="Image/virus-image.png" class="ball" alt="Ball" />
+      <img
+        src="Image/virus-image.png"
+        class="ball"
+        alt="Ball in Pong game"
+        loading="lazy"
+      />
 
       <!-- Right paddle (opponent's paddle) -->
       <img
         src="Image/ultrablue-2.png"
         class="paddle opponent"
-        alt="Opponent Paddle"
+        alt="Opponent's paddle in Pong game"
+        loading="lazy"
       />
 
       <!-- Vertical text in the center -->
-      <div class="center-text">Stay safe & always charged</div>
+      <h2 class="center-text">Stay safe & always charged</h2>
 
       <!-- Text at the bottom-left -->
-      <div class="bottom-left-text">Tap the screen to move paddle</div>
-    </div>
+      <p class="bottom-left-text">Tap the screen to move paddle</p>
+    </section>
+
     <div class="padding-container"></div>
     <script src="JavaScript/pong.js"></script>
   </body>
