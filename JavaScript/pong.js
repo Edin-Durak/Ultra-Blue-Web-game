@@ -4,7 +4,7 @@
   const opponentPaddle = pongContainer.querySelector(".opponent");
   const ball = pongContainer.querySelector(".ball");
 
-  let ballSpeed = 5;
+  let ballSpeed = 12;
   let playerPosY =
     pongContainer.clientHeight / 2 -
     playerPaddle.getBoundingClientRect().height / 2;
@@ -21,7 +21,7 @@
 
   // Adjust ball speed based on screen size
   if (window.innerWidth <= 992) {
-    ballSpeed = 2; // Slower speed for smaller screens
+    ballSpeed = 3; // Slower speed for smaller screens
   }
 
   function updateSizes() {
