@@ -29,7 +29,7 @@ body {
       rgba(22, 19, 50, 0.95) 0%,
       rgba(22, 19, 50, 0.95) 100%
     ),
-    url(../Image/background-pong-image.png) lightgray center center / 150% 150%
+    url(../Image/background-pong-image.png) lightgray center center / 100% 100%
       no-repeat;
   background-color: #fff;
   margin: 0 auto;
