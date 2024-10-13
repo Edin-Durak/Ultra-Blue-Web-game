@@ -31,8 +31,13 @@ body {
       rgba(22, 19, 50, 0.95) 0%,
       rgba(22, 19, 50, 0.95) 100%
     ),
-    url(../Image/background-pong-image.png) lightgray center center / 65% 65%
-      repeat;
+    url(../Image/background-pong-image.png) lightgray center center / 150% 150%
+      no-repeat;
+  background-color: #fff;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   .paddle {
     width: 8rem; /* Base size */
