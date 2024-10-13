@@ -11,6 +11,9 @@ You can view the live version of the game on the Shopify store here: [getultrabl
 - **Touch Controls**: Players can interact with the game by tapping the screen to move the paddle.
 - **SEO-Optimized**: Images are loaded lazily to improve performance, and the game structure is optimized for accessibility.
 
+## Screenshot
+  ![Capture](https://github.com/user-attachments/assets/d05d6e96-1b51-4f3f-bdf7-9a5992d15bd0)
+
 ## Technology Stack
 
 - **HTML**: Markup for the game layout.
