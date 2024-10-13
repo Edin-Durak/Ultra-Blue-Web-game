@@ -4,7 +4,7 @@
   const opponentPaddle = pongContainer.querySelector(".opponent");
   const ball = pongContainer.querySelector(".ball");
 
-  let ballSpeed = 12;
+  let ballSpeed = 8;
   let playerPosY =
     pongContainer.clientHeight / 2 -
     playerPaddle.getBoundingClientRect().height / 2;
@@ -17,12 +17,21 @@
     pongContainer.clientHeight / 2 - ball.getBoundingClientRect().height / 2;
   let ballDirX = 1;
   let ballDirY = 1;
-  let opponentSpeed = 3;
+  let opponentSpeed = 5;
 
-  // Adjust ball speed based on screen size
-  if (window.innerWidth <= 992) {
-    ballSpeed = 3; // Slower speed for smaller screens
+  // Function to set ball and opponent paddle speed based on screen size
+  function updateSpeed() {
+    if (window.innerWidth <= 992) {
+      ballSpeed = 3; // Slower speed for smaller screens
+      opponentSpeed = 3;
+    } else {
+      ballSpeed = 8; // Normal speed for larger screens
+      opponentSpeed = 5;
+    }
   }
+
+  // Call updateSpeed on initial load
+  updateSpeed();
 
   function updateSizes() {
     playerHeight = playerPaddle.getBoundingClientRect().height;
@@ -37,8 +46,8 @@
       pongContainer.clientWidth / 2 - ball.getBoundingClientRect().width / 2;
     ballPosY =
       pongContainer.clientHeight / 2 - ball.getBoundingClientRect().height / 2;
-    ballDirX = Math.random() < 0.5 ? 1 : -1;
-    ballDirY = Math.random() < 0.5 ? 1 : -1;
+    ballDirX = Math.random() < 0.5 ? -1 : -1;
+    ballDirY = Math.random() < 0.5 ? -1 : 1;
   }
 
   function update() {
@@ -55,26 +64,32 @@
       ballDirY *= -1; // Reverse Y direction
     }
 
+    const penetrationDepth = -15; // The amount the ball should enter the paddle before bouncing
+
     // Ball collision with player's paddle
     if (
       ballPosX <=
-        playerPaddle.offsetLeft + playerPaddle.getBoundingClientRect().width &&
+        playerPaddle.offsetLeft + playerPaddle.offsetWidth + penetrationDepth &&
       ballPosY + ballHeight >= playerPosY &&
       ballPosY <= playerPosY + playerHeight
     ) {
+      // Ball direction changes after entering the paddle slightly
       ballDirX *= -1;
+      // Position the ball a few pixels inside the paddle before changing direction
       ballPosX =
-        playerPaddle.offsetLeft + playerPaddle.getBoundingClientRect().width;
+        playerPaddle.offsetLeft + playerPaddle.offsetWidth + penetrationDepth;
     }
 
     // Ball collision with opponent's paddle
     if (
-      ballPosX + ballWidth >= opponentPaddle.offsetLeft &&
+      ballPosX + ballWidth >= opponentPaddle.offsetLeft - penetrationDepth &&
       ballPosY + ballHeight >= opponentPosY &&
       ballPosY <= opponentPosY + opponentHeight
     ) {
+      // Ball direction changes after entering the paddle slightly
       ballDirX *= -1;
-      ballPosX = opponentPaddle.offsetLeft - ballWidth;
+      // Position the ball a few pixels inside the opponent's paddle before changing direction
+      ballPosX = opponentPaddle.offsetLeft - ballWidth - penetrationDepth;
     }
 
     if (ballPosX < 0 || ballPosX > pongContainer.clientWidth) {
@@ -135,6 +150,9 @@
 
     e.preventDefault(); // Prevent scrolling when touching the screen
   });
+
+  // Update speed on window resize
+  window.addEventListener("resize", updateSpeed);
 
   // Start the game loop
   resetBall();
